@@ -7,7 +7,7 @@ function handleSingleFile() {
   local file_owner_user=$(stat -c %U ${singleFile})
   local file_owner_group=$(stat -c %G ${singleFile})
   local new_logrotate_entry=$(createLogrotateConfigurationEntry "${singleFile}" "${file_owner_user}" "${file_owner_group}" "${logrotate_copies}" "${logrotate_logfile_compression}" "${logrotate_logfile_compression_delay}" "${logrotate_mode}" "${logrotate_interval}" "${logrotate_size}" "${logrotate_dateformat}" "${logrotate_minsize}" "${logrotate_maxage}" "${logrotate_prerotate}" "${logrotate_postrotate}")
-  echo "Inserting new ${singleFile} to /usr/bin/logrotate.d/logrotate.conf"
+  #echo "Inserting new ${singleFile} to /usr/bin/logrotate.d/logrotate.conf"
   insertConfigurationEntry "$new_logrotate_entry" "/usr/bin/logrotate.d/logrotate.conf"
 }
 
@@ -48,7 +48,7 @@ do
   for f in ${log_files};
   do
     if [ -f "${f}" ]; then
-      echo "Found new file $f, Processing..."
+      #echo "Found new file $f, Processing..."
       handleSingleFile "$f"
     fi
   done
@@ -68,10 +68,10 @@ do
   for f in ${log_files};
   do
     if [ -f "${f}" ]; then
-      echo "Found new file $f, Processing..."
+      #echo "Found new file $f, Processing..."
       handleSingleFile "$f"
     fi
   done
 done
 
-cat /usr/bin/logrotate.d/logrotate.conf
+#cat /usr/bin/logrotate.d/logrotate.conf

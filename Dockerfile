@@ -1,5 +1,4 @@
 FROM blacklabelops/alpine:3.8
-MAINTAINER Steffen Bleul <sbl@blacklabelops.com>
 
 # logrotate version (e.g. 3.9.1-r0)
 ARG LOGROTATE_VERSION=latest
@@ -48,6 +47,6 @@ COPY logrotate.sh /usr/bin/logrotate.d/logrotate.sh
 COPY logrotateConf.sh /usr/bin/logrotate.d/logrotateConf.sh
 COPY logrotateCreateConf.sh /usr/bin/logrotate.d/logrotateCreateConf.sh
 
-ENTRYPOINT ["/sbin/tini","--","/usr/bin/logrotate.d/docker-entrypoint.sh"]
+ENTRYPOINT ["/sbin/tini", "-g", "--", "/usr/bin/logrotate.d/docker-entrypoint.sh"]
 VOLUME ["/logrotate-status"]
 CMD ["cron"]
